@@ -7,6 +7,34 @@ import matplotlib.pyplot as plt
 from data_preprocessing import create_compressed_dataloaders
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+from sklearn.metrics import roc_auc_score, precision_score, recall_score, f1_score
+
+def compute_classification_metrics(y_true, y_score, threshold=0.1):
+    y_pred = (y_score > threshold).astype(int)
+    return {
+        "AUC": roc_auc_score(y_true, y_score),
+        "Precision": precision_score(y_true, y_pred),
+        "Recall": recall_score(y_true, y_pred),
+        "F1-score": f1_score(y_true, y_pred)
+    }
+
+def compute_auc_score(reconstruction_errors: np.ndarray, ground_truth: np.ndarray) -> float:
+    """
+    AUC 스코어를 계산합니다.
+
+    Parameters:
+    - reconstruction_errors (np.ndarray): 모델이 출력한 재구성 에러
+    - ground_truth (np.ndarray): 0(정상) 또는 1(이상)으로 구성된 실제 이상 여부
+
+    Returns:
+    - float: AUC 스코어
+    """
+    if len(reconstruction_errors) != len(ground_truth):
+        raise ValueError("예측값과 정답의 길이가 다릅니다.")
+
+    auc = roc_auc_score(ground_truth, reconstruction_errors)
+    print(f"AUC Score: {auc:.4f}")
+    return auc
 
 def basic_data_analysis_plot(data, interval='1H'):
     """

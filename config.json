@@ -1,0 +1,10 @@
+{
+    "batch_size": 32,
+    "threshold": 0.1,
+    "pca_components": 2,
+    "top_n": 10,
+    "n_clusters": 3,
+    "num_epochs": 3,
+    "learning_rate": 0.001,
+    "consecutive_threshold_steps": 10
+}

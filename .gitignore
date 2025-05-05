@@ -1,0 +1,17 @@
+﻿*.npy
+*.pt
+*.pkl
+*.log
+__pycache__/
+.env/
+.DS_Store
+*.ipynb
+*.csv
+*.json
+*.zip
+*.h5
+*.log
+saved_models/
+preprocessed_data/
+cross_validation_results/
+predictive_results/

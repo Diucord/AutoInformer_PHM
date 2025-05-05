@@ -3,6 +3,7 @@ import os
 import csv
 import torch
 import numpy as np
+import logging
 import matplotlib.pyplot as plt
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.decomposition import PCA
@@ -178,6 +179,7 @@ def save_anomaly_summary(
             writer.writerow([start, end, avg_error])
 
     logging.info(f"Anomaly summary saved to {file_path}")
+    return anomaly_ranges
 
 
 def save_clustered_anomalies(
@@ -188,7 +190,7 @@ def save_clustered_anomalies(
     file_name: str = "clustered_anomalies.csv"
 ):
     """
-    클러스터링 결과를 CSV로 저장.
+    클러스터링 결과를 CSV로 저장
     """
     os.makedirs(output_dir, exist_ok=True)
     file_path = os.path.join(output_dir, file_name)
